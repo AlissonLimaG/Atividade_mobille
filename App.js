@@ -32,6 +32,7 @@ const login = () => (
       </View>
       <Input
         placeholder="Email"
+        
       />
       <Input
         placeholder="Senha"
