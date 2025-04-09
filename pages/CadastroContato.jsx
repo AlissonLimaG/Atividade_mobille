@@ -52,8 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 40,
         paddingHorizontal: 24,
-        borderRadius: '8px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
     },
     cadastroTitle: {
         fontSize: 48,

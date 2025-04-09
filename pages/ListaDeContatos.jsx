@@ -10,18 +10,22 @@ export default ListaDeContatos = ({ navigation }) => (
                 avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
                 name={'Alisson'}
                 number={'81 91234-4321'}
+                email={'alisson@gmail.com'}
+                navigation={navigation}
             />
             <Contato
                 avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
                 name={'Luana'}
                 number={'81 91464-4321'}
-                onPress={() => navigation.navigate('detalhesContato', { nome: 'Luana', numero: '81 91234-4321', email: 'Luana@gmail.com' })}
+                email={'luana@gmail.com'}
+                navigation={navigation}
             />
             <Contato
                 avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
                 name={'Lilian'}
                 number={'81 91294-4321'}
-                onPress={() => navigation.navigate('detalhesContato', { nome: 'Lilian', numero: '81 91234-4321', email: 'Lilian@gmail.com' })}
+                email={'lilian@gmail.com'}
+                navigation={navigation}
             />
         </View>
     </View>

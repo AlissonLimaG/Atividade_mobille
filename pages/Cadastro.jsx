@@ -6,7 +6,6 @@ export default cadastro = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.form}>
-                <Text style={styles.cadastroTitle}>Cadastro</Text>
                 <Input
                     placeholder="Nome"
                     style={styles.input}
@@ -64,15 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 40,
         paddingHorizontal: 24,
-        borderRadius: '8px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
-    },
-    cadastroTitle: {
-        fontSize: 48,
-        position: 'realative',
-        top: '15px',
-        fontWeight: '500',
-        marginBottom: 64
+
     },
     esqueceuSenhaTitle: {
         fontSize: 32,

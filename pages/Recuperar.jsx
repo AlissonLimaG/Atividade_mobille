@@ -1,12 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from "react-native-elements";
 
-export default Recuperar = () => {
-    
+export default Recuperar = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
             <View style={styles.form}>
-                <Text style={styles.esqueceuSenhaTitle}>Recuperar Senha</Text>
                 <Input
                     placeholder="Email"
                     style={styles.input}
@@ -14,6 +13,7 @@ export default Recuperar = () => {
 
                 <View style={{ width: '100%' }}>
                     <Button
+                        onPress={() => navigation.navigate('login')}
                         title='Enviar'
                         buttonStyle={{
                             marginBottom: '15px',
@@ -47,8 +47,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 40,
         paddingHorizontal: 24,
-        borderRadius: '8px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
     },
     cadastroTitle: {
         fontSize: 48,
