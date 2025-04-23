@@ -1,0 +1,38 @@
+{
+  "usuario": [
+    {
+      "id": "0",
+      "nome": "Alisson",
+      "cpf": "12312312312",
+      "email": "alisson@gmail.com",
+      "senha": "12345678"
+    },
+    {
+      "id": "0",
+      "nome": "Lilian",
+      "cpf": "12312312312",
+      "email": "lilian@gmail..com",
+      "senha": "12345678"
+    }
+  ],
+  "contato": [
+    {
+      "nome": "Luanaaaa",
+      "email": "lu@gmail.com",
+      "telefone": "12312312312",
+      "id": "6fe2"
+    },
+    {
+      "id": "1647",
+      "nome": "Alisson",
+      "email": "alisson@gmail.com",
+      "telefone": "123456789"
+    },
+    {
+      "id": "dcc9",
+      "nome": "messias",
+      "email": "messias@gmail.com",
+      "telefone": "12345678"
+    }
+  ]
+}

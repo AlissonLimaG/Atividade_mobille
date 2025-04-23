@@ -1,31 +1,58 @@
+import { useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { Input, Button } from "react-native-elements"
+import ContactsService from "../services/ContactsService";
 
-export default CadastroContato = () => (
+export default CadastroContato = ({navigation}) => {
 
-    <View style={styles.container}>
-        <View style={styles.form}>
-            <Input
-                placeholder="Nome"
-                style={styles.input}
-            />
-            <Input
-                placeholder="Email"
-                style={styles.input}
-            />
-            <Input
-                placeholder="Telefone"
-                style={styles.input}
-            />
-            <View style={{ width: '100%', marginTop: 16 }}>
-                <Button
-                    title='Salvar'
+    const [getNome,setNome] = useState();
+    const [getEmail,setEmail] = useState();
+    const [getTelefone,setTelefone] = useState();
+
+    const cadastrarContato = async () =>{
+        const data = {
+            nome:getNome,
+            email:getEmail,
+            telefone:getTelefone
+        }
+
+        const res = await ContactsService.save(data);
+        alert(res.statusText)
+        if(res.statusText == "Created") navigation.navigate('contatos')
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.form}>
+                <Input
+                    placeholder="Nome"
+                    style={styles.input}
+                    value={getNome}
+                    onChangeText={setNome}
                 />
+                <Input
+                    placeholder="Email"
+                    style={styles.input}
+                    value={getEmail}
+                    onChangeText={setEmail}
+                />
+                <Input
+                    placeholder="Telefone"
+                    style={styles.input}
+                    value={getTelefone}
+                    onChangeText={setTelefone}
+                />
+                <View style={{ width: '100%', marginTop: 16 }}>
+                    <Button
+                        title='Salvar'
+                        onPress={cadastrarContato}
+                    />
+                </View>
             </View>
-        </View>
 
-    </View>
-)
+        </View>
+    )
+}
 
 
 const styles = StyleSheet.create({
@@ -43,10 +70,10 @@ const styles = StyleSheet.create({
         marginBottom: 32
     },
     form: {
-        gap:'1rem',
+        gap: '1rem',
         width: '90%',
         maxWidth: '500px',
-        height:'80%',
+        height: '80%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

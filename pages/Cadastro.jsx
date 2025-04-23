@@ -1,30 +1,63 @@
+import { useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { Input, Button } from "react-native-elements"
+import UserService from "../services/UserService"
 
 export default cadastro = ({ navigation }) => {
+    const [getId, setId] = useState(0);
+    const [getNome, setNome] = useState('');
+    const [getEmail, setEmail] = useState('');
+    const [getCpf, setCpf] = useState('');
+    const [getSenha, setSenha] = useState('');
+
+    const saveUser = () => {
+        setId(getId + 1);
+
+        const data = {
+            id: getId,
+            nome: getNome,
+            email: getEmail,
+            cpf: getCpf,
+            senha: getSenha
+        }
+
+        console.log(data);
+
+        UserService.save(data);
+    }
 
     return (
+
         <View style={styles.container}>
             <View style={styles.form}>
                 <Input
                     placeholder="Nome"
                     style={styles.input}
+                    value={getNome}
+                    onChangeText={setNome}
                 />
                 <Input
                     placeholder="Email"
                     style={styles.input}
+                    value={getEmail}
+                    onChangeText={setEmail}
                 />
                 <Input
                     placeholder="CPF"
                     style={styles.input}
+                    value={getCpf}
+                    onChangeText={setCpf}
                 />
                 <Input
                     placeholder="Senha"
                     style={styles.input}
+                    value={getSenha}
+                    onChangeText={setSenha}
                 />
                 <View style={{ width: '100%', marginTop: 16 }}>
                     <Button
                         title='Cadastrar'
+                        onPress={saveUser}
                     />
                 </View>
 

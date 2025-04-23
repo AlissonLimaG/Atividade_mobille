@@ -1,7 +1,28 @@
+import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Avatar, Input, Button } from "react-native-elements";
+import UserService from '../services/UserService';
 
 export default Login = ({ navigation }) => {
+
+    const [getEmail, setEmail] = useState('');
+    const [getSenha, setSenha] = useState('');
+
+    const login = async () => {
+       const data = {
+            email:getEmail,
+            senha:getSenha
+        }
+
+        const userExists = await UserService.login(data);
+
+        console.log(userExists)
+
+        if(userExists) {
+            navigation.navigate('contatos');
+        }
+        else alert('Credênciais inválidas');
+    }
 
     return (
         <View style={styles.container}>
@@ -18,15 +39,19 @@ export default Login = ({ navigation }) => {
                 </View>
                 <Input
                     placeholder="Email"
+                    value={getEmail}
+                    onChangeText={setEmail}
                 />
                 <Input
                     placeholder="Senha"
+                    value={getSenha}
+                    onChangeText={setSenha}
                 />
 
                 <View style={{ width: '100%', marginBottom: 16 }}>
                     <Button
                         title='Entrar'
-                        onPress={() => navigation.navigate('contatos')}
+                        onPress={login}
                         buttonStyle={{
                             marginTop: 16,
                         }} />

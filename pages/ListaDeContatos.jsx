@@ -1,37 +1,41 @@
 import { View, StyleSheet } from "react-native"
 import Contato from "../components/Contato"
-import { Avatar, ListItem } from "react-native-elements"
+import { useEffect, useState } from "react"
+import ContactsService from "../services/ContactsService"
 
-export default ListaDeContatos = ({ navigation }) => (
+export default ListaDeContatos = ({ navigation }) => {
+    const [getContatos, setContatos] = useState([]);
 
-    <View style={styles.container}>
-        <View style={styles.listaContatosContainer}>
-            <Contato
-                avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
-                name={'Alisson'}
-                number={'81 91234-4321'}
-                email={'alisson@gmail.com'}
-                navigation={navigation}
-            />
-            <Contato
-                avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
-                name={'Luana'}
-                number={'81 91464-4321'}
-                email={'luana@gmail.com'}
-                navigation={navigation}
-            />
-            <Contato
-                avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
-                name={'Lilian'}
-                number={'81 91294-4321'}
-                email={'lilian@gmail.com'}
-                navigation={navigation}
-            />
+    useEffect(() => {
+        const carregarContatos = async () => {
+            const contatos = await ContactsService.findAll();
+            setContatos(contatos);
+        }
+
+        carregarContatos();
+
+    }, [])
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.listaContatosContainer}>
+                {getContatos.map((contato) => (
+                    <Contato
+                        key={contato.id}
+                        id={contato.id}
+                        avatar={'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}
+                        name={contato.nome}
+                        number={contato.telefone}
+                        email={contato.email}
+                        navigation={navigation}
+                    />
+                ))}
+            </View>
         </View>
-    </View>
 
 
-)
+    )
+}
 
 const styles = StyleSheet.create({
     container: {

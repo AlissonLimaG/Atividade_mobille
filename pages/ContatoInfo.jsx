@@ -1,10 +1,39 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 import { Input, Button } from "react-native-elements"
 import { useRoute } from "@react-navigation/native";
+import { useState } from "react";
+import ContactsService from "../services/ContactsService";
+import UserService from "../services/UserService";
 
-export default CadastroContato = () => {
+export default CadastroContato = ({ navigation }) => {
+
     const route = useRoute();
-    const {name, number, email} = route.params;
+    const { name, number, email, id } = route.params;
+
+    const [getNome, setNome] = useState(name);
+    const [getTelefone, setTelefone] = useState(number);
+    const [getEmail, setEmail] = useState(email);
+
+    const deletarContato = async () => {
+        const res = await ContactsService.delete(id);
+        alert(res.statusText);
+        if (res.statusText == "OK") navigation.navigate('contatos')
+    };
+
+    const atualizarContato = async () => {
+        console.log(id)
+        const data = {
+            id: id,
+            nome: getNome,
+            email: getEmail,
+            telefone: getTelefone
+        }
+
+        console.log(id)
+
+        const res = await ContactsService.update(data);
+        alert(res.statusText);
+    }
 
     return (
         <View style={styles.container}>
@@ -12,26 +41,31 @@ export default CadastroContato = () => {
                 <Input
                     placeholder="Nome"
                     style={styles.input}
-                    value={name}
+                    value={getNome}
+                    onChangeText={setNome}
                 />
                 <Input
                     placeholder="Email"
                     style={styles.input}
-                    value={email}
+                    value={getEmail}
+                    onChangeText={setEmail}
                 />
                 <Input
                     placeholder="Telefone"
                     style={styles.input}
-                    value={number}
+                    value={getTelefone}
+                    onChangeText={setTelefone}
                 />
                 <View style={{ width: '100%', marginTop: 16 }}>
                     <Button
                         title='Alterar'
+                        onPress={atualizarContato}
                     />
                 </View>
                 <View style={{ width: '100%' }}>
                     <Button
                         title='Excluir'
+                        onPress={deletarContato}
                         buttonStyle={{ backgroundColor: 'red' }}
                     />
                 </View>

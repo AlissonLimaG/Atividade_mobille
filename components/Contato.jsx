@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native"
 import { Avatar, ListItem } from "react-native-elements"
 
-export default Contato = ({ name, number, email, navigation }) => (
-    <ListItem bottomDivider                 
-    onPress={() => navigation.navigate('detalhesContato', { name, number, email })}
+export default Contato = ({ name, number, email, navigation, id }) => (
+
+    <ListItem bottomDivider
+        onPress={() => navigation.navigate('detalhesContato', { name, number, email, id })}
     >
         <Avatar
             icon={{ name: 'person' }}
