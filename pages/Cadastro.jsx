@@ -2,6 +2,7 @@ import { useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { Input, Button } from "react-native-elements"
 import UserService from "../services/UserService"
+import { showMessage } from "react-native-flash-message"
 
 export default cadastro = ({ navigation }) => {
     const [getId, setId] = useState(0);
@@ -10,7 +11,7 @@ export default cadastro = ({ navigation }) => {
     const [getCpf, setCpf] = useState('');
     const [getSenha, setSenha] = useState('');
 
-    const saveUser = () => {
+    const saveUser = async () => {
         setId(getId + 1);
 
         const data = {
@@ -21,9 +22,9 @@ export default cadastro = ({ navigation }) => {
             senha: getSenha
         }
 
-        console.log(data);
+        const userSaved = await UserService.save(data);
 
-        UserService.save(data);
+        if(userSaved) navigation.navigate("login");
     }
 
     return (

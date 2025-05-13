@@ -1,48 +1,63 @@
 import axios from "axios"
 import API_PATH from "../enviroment"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import FirebaseService from "./FirebaseService";
+import { showMessage } from "react-native-flash-message";
 
 export default userService = {
 
+    findAll: async () => {
+        return await axios.get(API_PATH + "usuario");
+    },
+
     save: async (data) => {
+
+        const firebaseAuth = await FirebaseService.create(data.email, data.senha);
+
+        if (!firebaseAuth) {
+            showMessage({
+                message: "Erro",
+                type: "danger",
+                description: "Falha ao cadastrar usuário."
+            })
+
+            return false;
+        };
+
         await axios.post(
             API_PATH + "usuario",
             {
-                id:data.id,
-                nome:data.nome,
-                cpf:data.cpf,
-                email:data.email,
-                senha:data.senha
+                id: data.id,
+                nome: data.nome,
+                cpf: data.cpf,
+                email: data.email,
+                senha: data.senha
             }
-        ).then(response => alert(response.statusText))
-         .catch(err => alert(err))
+        ).then(response => {
+            showMessage({
+                message: "Sucesso!",
+                type: "success",
+                description: "Usuário criado com sucesso!"
+            })
+
+        }).catch(err => {
+            console.log(err.mesage);
+        })
+
+        return true;
+
     },
 
-    findAll: async () => {
-        return await axios.get(API_PATH + "usuario");
-    },    
+
+    login: async (data) => {
+        const logged = await FirebaseService.login(data.email, data.senha);
+        if (!logged) return false;
+        return true;
+    },
+
     
-    login: async (data) => {
-        const users = await axios.get(API_PATH + "usuario");
-        const usersArray = Array.from(users);
+    logout: async () => {
 
-        const user = usersArray.filter(u => data.email == u.email && data.senha == u.senha).length;
-
-        console.log(data)
-
-        if(user == 1) return true;
-        else return false;
-    },
-
-    login: async (data) => {
-        const users = (await axios.get(API_PATH + "usuario")).data;
-        const usersArray = Array.from(users);
-
-        const user = usersArray.filter(u => data.email == u.email && data.senha == u.senha).length;
-
-        console.log(data)
-
-        if(user == 1) return true;
-        else return false;
     }
 
 }

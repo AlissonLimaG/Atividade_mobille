@@ -8,70 +8,76 @@ import ListaDeContatos from "./pages/ListaDeContatos";
 import CadastroContato from "./pages/CadastroContato";
 import ContatoInfo from "./pages/ContatoInfo";
 import AddButton from "./components/AddButton";
+import FlashMessage from "react-native-flash-message";
+import LogoutButton from "./components/LogoutButton";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="login">
+    <>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="login">
 
-        <Stack.Screen
-          name="login"
-          component={Login}
-          options={{
-            headerShown:false
-          }}
-        />
+          <Stack.Screen
+            name="login"
+            component={Login}
+            options={{
+              headerShown: false
+            }}
+          />
 
-        <Stack.Screen
-          name="cadastro"
-          component={Cadastro}
-          options={{
-            headerTitle:'Usuario',
-            headerTitleAlign:'center',
-          }}
-        />
+          <Stack.Screen
+            name="cadastro"
+            component={Cadastro}
+            options={{
+              headerTitle: 'Usuario',
+              headerTitleAlign: 'center',
+            }}
+          />
 
-        <Stack.Screen
-          name="recuperar"
-          component={Recuperar}
-          options={{
-            headerShown:false
-          }}  
-        />
+          <Stack.Screen
+            name="recuperar"
+            component={Recuperar}
+            options={{
+              headerShown: false
+            }}
+          />
 
-        <Stack.Screen
-          name="detalhesContato"
-          component={ContatoInfo}
-          options={{
-            headerTitle:'Contato',
-            headerTitleAlign:'center',
-          }}
-        />
+          <Stack.Screen
+            name="detalhesContato"
+            component={ContatoInfo}
+            options={{
+              headerTitle: 'Contato',
+              headerTitleAlign: 'center',
+            }}
+          />
 
-        <Stack.Screen
-          name="contatos"
-          component={ListaDeContatos}
-          options={{
-            headerTitle:'Contatos',
-            headerTitleAlign:'center',
-            headerRight: () => <AddButton/>
-          }}
-        />
+          <Stack.Screen
+            name="contatos"
+            component={ListaDeContatos}
+            options={{
+              headerTitle: 'Contatos',
+              headerTitleAlign: 'center',
+              headerRight: () => <AddButton />,
+              headerLeft: () => <LogoutButton />
+            }}
+          />
 
-        <Stack.Screen
-          name="cadastroContato"
-          component={CadastroContato}
-          options={{
-            headerTitle:'Contato',
-            headerTitleAlign:'center',
-          }}
-        />
+          <Stack.Screen
+            name="cadastroContato"
+            component={CadastroContato}
+            options={{
+              headerTitle: 'Contato',
+              headerTitleAlign: 'center',
+            }}
+          />
 
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
+      <FlashMessage position={"top"} />
+    </>
   )
 };
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Avatar, Input, Button } from "react-native-elements";
 import UserService from '../services/UserService';
+import { showMessage } from 'react-native-flash-message';
 
 export default Login = ({ navigation }) => {
 
@@ -9,20 +10,32 @@ export default Login = ({ navigation }) => {
     const [getSenha, setSenha] = useState('');
 
     const login = async () => {
-       const data = {
-            email:getEmail,
-            senha:getSenha
+        const data = {
+            email: getEmail,
+            senha: getSenha
         }
 
         const userExists = await UserService.login(data);
 
-        console.log(userExists)
+        if (userExists) {
+            showMessage({
+                message: "Sucesso!",
+                type: "success",
+                description: "Login bem sucedido!"
+            })
 
-        if(userExists) {
             navigation.navigate('contatos');
         }
-        else alert('Credênciais inválidas');
+
+        else {
+            showMessage({
+                message: "Erro",
+                type: "danger",
+                description: "Credenciais inválidas"
+            })
+        };
     }
+
 
     return (
         <View style={styles.container}>
